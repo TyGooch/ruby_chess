@@ -13,7 +13,7 @@ class Pawn < Piece
     forward_steps.each do |step|
       result << [row + step, col]
     end
-    result
+    result + side_attacks
   end
 
 
@@ -36,7 +36,12 @@ class Pawn < Piece
   end
 
   def side_attacks
-    
+    result = []
+    side_dirs = [[forward_dir, 1], [forward_dir, -1]]
+    side_dirs.each do |dir|
+      attack_pos = [pos[0] + dir[0], pos[1] + dir[1]]
+      result << attack_pos if @board.valid_pos?(attack_pos) && !@board.empty?(attack_pos) && @board[attack_pos].color != color
+    end
+    result
   end
-
 end

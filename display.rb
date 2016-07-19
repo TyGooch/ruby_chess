@@ -55,27 +55,32 @@ class Display
   end
 end
 
-board = Board.new
-
-d = Display.new(board)
-d.render
-d.board.move([6,0],[4,0])
-d.render
-d.board.move([7,0],[5,0])
-d.render
-d.board.move([7,1],[5,2])
-d.render
-d.board.move([1,3], [3,3])
-d.render
-d.board.move([5,2], [3,3])
-d.render
-d.board.move([5,0], [5,7])
-d.render
-d.board.move([5,7], [1,7])
-d.render
-d.board.move([1,7], [2,7])
-d.board.move([2,7], [2,4])
-d.board.move([2,4], [1,4])
-d.board.move([1,4], [1,3])
-d.render
-p d.board.checkmate?(:black)
+# board = Board.new
+#
+# d = Display.new(board)
+# d.render
+# d.board.move([6,0],[4,0])
+# d.render
+# d.board.move([7,0],[5,0])
+# d.render
+# d.board.move([7,1],[5,2])
+# d.render
+# d.board.move([1,3], [3,3])
+# d.render
+# d.board.move([5,2], [3,3])
+# d.render
+# d.board.move([5,0], [5,7])
+# d.render
+# d.board.move([5,7], [1,7])
+# d.render
+#
+# # testing for pawn
+# # d.board.move([1,7], [2,7])
+# # d.board.move([2,7], [2,4])
+# # d.board.move([2,4], [1,4])
+# #
+# # d.board.move([1,2], [2,2])
+# # d.board.move([2,2], [3,3])
+#
+# d.render
+# p d.board.checkmate?(:black)

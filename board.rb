@@ -101,10 +101,12 @@ class Board
     false
   end
 
-  def checkmate?(color)
-    king_pos = find_king(color)
-    byebug
-    return true if in_check?(color) && self[king_pos].valid_moves.empty?
+  def checkmate?
+    kings = [find_king(:white), find_king(:black)]
+    kings.each do |king_pos|
+      color = @rows[king_pos[0]][king_pos[1]].color
+      return true if in_check?(color) && self[king_pos].valid_moves.empty?
+    end
     false
   end
 
@@ -146,13 +148,13 @@ class Board
   def fill_king(color)
     row = 0
     row = 7 if color == :white
-    @rows[row][3] = King.new(color, self, [row, 3])
+    @rows[row][4] = King.new(color, self, [row, 4])
   end
 
   def fill_queen(color)
     row = 0
     row = 7 if color == :white
-    @rows[row][4] = Queen.new(color, self, [row, 4])
+    @rows[row][3] = Queen.new(color, self, [row, 3])
   end
 
   def populate
