@@ -18,6 +18,8 @@ class Game
     until @board.checkmate?
       take_turn
     end
+    system ("clear")
+    @display.end_render
     puts "Checkmate."
   end
 

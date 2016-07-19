@@ -37,6 +37,29 @@ class Display
     { background: bg, color: :white }
   end
 
+  def end_build_grid
+    @board.rows.map.with_index do |row, i|
+    end_build_row(row, i)
+    end
+  end
+
+  def end_build_row(row, i)
+    row.map.with_index do |piece, j|
+      color_options = end_colors_for(i, j)
+      piece.to_s.colorize(color_options)
+    end
+  end
+
+  def end_colors_for(i, j)
+    selected_array = [[1,1],[1,2],[1,5],[6,1],[5,1],[6,2],[6,3],[6,4],[6,5],[6,6],[5,6],[1,6], [3,3], [3,4], [4,3], [4,4]]
+    if selected_array.include?([i, j])
+      bg = :black
+    else
+      bg = :red
+    end
+    { background: bg, color: :white }
+  end
+
   def move
     result = nil
     until result
@@ -54,34 +77,9 @@ class Display
     x = build_grid
     build_grid.each { |row| puts row.join }
   end
-end
 
-# board = Board.new
-#
-# d = Display.new(board)
-# d.render
-# d.board.move([6,0],[4,0])
-# d.render
-# d.board.move([7,0],[5,0])
-# d.render
-# d.board.move([7,1],[5,2])
-# d.render
-# d.board.move([1,3], [3,3])
-# d.render
-# d.board.move([5,2], [3,3])
-# d.render
-# d.board.move([5,0], [5,7])
-# d.render
-# d.board.move([5,7], [1,7])
-# d.render
-#
-# # testing for pawn
-# # d.board.move([1,7], [2,7])
-# # d.board.move([2,7], [2,4])
-# # d.board.move([2,4], [1,4])
-# #
-# # d.board.move([1,2], [2,2])
-# # d.board.move([2,2], [3,3])
-#
-# d.render
-# p d.board.checkmate?(:black)
+  def end_render
+    x = build_grid
+    end_build_grid.each { |row| puts row.join }
+  end
+end
