@@ -15,7 +15,7 @@ class Piece
   end
 
   def empty?
-
+    false
   end
 
   def valid_moves
@@ -23,10 +23,10 @@ class Piece
   end
 
   def move_into_check?(to_pos)
-    @board.in_check?(color)
+    dup_board = @board.deep_dup
+    dup_board.move(pos, to_pos).in_check?(@color)
   end
 
-  # private??
   def symbol
 
   end

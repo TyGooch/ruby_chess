@@ -5,9 +5,9 @@ require "byebug"
 class Board
   attr_reader :rows
   COLORS = [:white, :black]
-  def initialize()
+  def initialize(need_populate = true)
     @rows = Array.new(8) { Array.new(8) {NullPiece.instance} }
-    populate
+    populate if need_populate
   end
 
   def []=(pos, piece = nil)
@@ -31,6 +31,24 @@ class Board
 
   # private
 
+  # def deep_dup
+  #   result = Array.new(8) {Array.new(8) {NullPiece.new}}
+  #   dup_pieces(result)
+  # end
+
+  def deep_dup
+    new_board = Board.new(false)
+    pieces.each do |piece|
+      x, y = piece.pos
+      new_board.rows[x][y] = piece.class.new(piece.color, new_board, piece.pos)
+    end
+    new_board
+  end
+
+  def pieces
+    rows.flatten.reject {|piece| piece.empty?}
+  end
+
   def valid_pos?(pos)
     row, col = pos
     return false if row < 0 || row > 7
@@ -43,14 +61,19 @@ class Board
   end
 
   def in_check?(color)
-    oppo_color = ((color == :white?) ? (:black) : (:white))
-    king_pos = find_king(oppo_color)
+    king_pos = find_king(color)
     @rows.each do |row|
       row.each do |piece|
         # byebug
-        return true if !piece.is_a?(NullPiece) && piece.moves.include?(king_pos) && piece.color == color
+        return true if !piece.is_a?(NullPiece) && piece.moves.include?(king_pos) && piece.color != color
       end
     end
+    false
+  end
+
+  def checkmate?
+    king_pos = find_king(color)
+    return true if in_check?(color) && self[king_pos].valid_moves.empty?
     false
   end
 
