@@ -30,7 +30,7 @@ class Display
     if [i, j] == @cursor_pos
       bg = :light_red
     elsif (i + j).odd?
-      bg = :light_blue
+      bg = :red
     else
       bg = :grey
     end
