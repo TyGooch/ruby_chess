@@ -28,14 +28,6 @@ class Board
 
     raise "Not a valid move! for #{self[start]}" unless self[start].valid_moves.include?(end_pos)
 
-    # piece = self[start]
-    # piece.pos = end_pos
-    # self[end_pos] = piece
-    # self[start] = NullPiece.instance
-    # start_x, start_y = start
-    # end_x, end_y = end_pos
-    # rows[end_x][end_y] = rows[start_x][start_y]
-    # rows[start_x][start_y] = NullPiece.instance
     move!(start, end_pos)
 
   end
@@ -45,11 +37,6 @@ class Board
   end
 
   def move!(start, end_pos)
-    # piece = self[start]
-    # piece.pos = end_pos
-    # self[end_pos] = self[start]
-    # self[start] = NullPiece.instance
-
     start_x, start_y = start
     end_x, end_y = end_pos
     piece = rows[start_x][start_y]
@@ -59,13 +46,6 @@ class Board
     piece.pos = end_pos
     nil
   end
-
-  # private
-
-  # def deep_dup
-  #   result = Array.new(8) {Array.new(8) {NullPiece.new}}
-  #   dup_pieces(result)
-  # end
 
   def deep_dup
     new_board = Board.new(false)

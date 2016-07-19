@@ -8,7 +8,10 @@ class Game
   def initialize
     @board = Board.new
     @display = Display.new(@board)
-    @player = HumanPlayer.new(:white, @display)
+    @player1 = HumanPlayer.new(:white, @display)
+    @player2 = HumanPlayer.new(:black, @display)
+    @players = [@player1, @player2]
+    @curr_idx = 0
   end
 
   def play
@@ -19,10 +22,16 @@ class Game
   end
 
   def take_turn
-    @display.render
-    move_pos = @player.make_move
-    @board.move(move_pos[0], move_pos[1])
-    @display.render
+    begin
+      puts "It's #{@players[@curr_idx].color}'s turn."
+      move_pos = @players[@curr_idx].make_move
+      @board.move(move_pos[0], move_pos[1])
+    rescue Exception => e
+      puts "Got error: #{e}"
+      sleep 1
+      retry
+    end
+    swap_turn
   end
 
   def notify_players
@@ -30,7 +39,11 @@ class Game
   end
 
   def swap_turn
-
+    if @curr_idx == 0
+      @curr_idx = 1
+    else
+       @curr_idx = 0
+    end
   end
 
 end
