@@ -3,7 +3,7 @@ class Piece
 
   def initialize(color = nil, board, pos)
     @color, @board, @pos = color, board, pos
-
+    # @board[pos] = self
   end
 
   def moves

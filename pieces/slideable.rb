@@ -1,4 +1,4 @@
-module Slidable
+module Slideable
 
   HORIZONTAL_DIRS = [[0,1],
                      [1,0],
@@ -19,6 +19,14 @@ module Slidable
     end
 
     moves
+  end
+
+  def diagonal_dirs
+    DIAGONAL_DIRS
+  end
+
+  def horizontal_dirs
+    HORIZONTAL_DIRS
   end
 
   private
