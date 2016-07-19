@@ -4,6 +4,7 @@ require_relative "board"
 
 class Display
   include Cursorable
+  attr_reader :board
 
   def initialize(board)
     @board = board
@@ -56,6 +57,7 @@ end
 board = Board.new
 
 d = Display.new(board)
-while true
-  d.move
-end
+p d.board.in_check?(:black)
+# while true
+#   d.move
+# end

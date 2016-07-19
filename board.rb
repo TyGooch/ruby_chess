@@ -1,4 +1,5 @@
 require_relative 'pieces'
+require "byebug"
 # require_relative 'pieces/pawn'
 # require_relative 'pieces/null_piece'
 class Board
@@ -28,7 +29,38 @@ class Board
     self[start] = NullPiece.instance
   end
 
-  private
+  # private
+
+  def valid_pos?(pos)
+    row, col = pos
+    return false if row < 0 || row > 7
+    return false if col < 0 || col > 7
+    true
+  end
+
+  def empty?(pos)
+    self[pos].is_a?(NullPiece)
+  end
+
+  def in_check?(color)
+    oppo_color = ((color == :white?) ? (:black) : (:white))
+    king_pos = find_king(oppo_color)
+    @rows.each do |row|
+      row.each do |piece|
+        # byebug
+        return true if !piece.is_a?(NullPiece) && piece.moves.include?(king_pos) && piece.color == color
+      end
+    end
+    false
+  end
+
+  def find_king(color)
+    @rows.each_with_index do |arr, row|
+      arr.each_with_index do |piece, col|
+        return [row,col] if piece.is_a?(King) && piece.color == color
+      end
+    end
+  end
 
   def fill_pawn(color)
     row = 1

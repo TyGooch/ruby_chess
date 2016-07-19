@@ -6,9 +6,9 @@ class Piece
     # @board[pos] = self
   end
 
-  def moves
-    valid_moves
-  end
+  # def moves
+  #   # valid_moves
+  # end
 
   def to_s
     symbol
@@ -23,7 +23,7 @@ class Piece
   end
 
   def move_into_check?(to_pos)
-
+    @board.in_check?(color)
   end
 
   # private??
