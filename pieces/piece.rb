@@ -6,12 +6,7 @@ class Piece
 
   def initialize(color = nil, board, pos)
     @color, @board, @pos = color, board, pos
-    # @board[pos] = self
   end
-
-  # def moves
-  #   # valid_moves
-  # end
 
   def to_s
     symbol
@@ -36,7 +31,6 @@ class Piece
   end
 
   def symbol
-
+    #defined in subclasses
   end
-
 end

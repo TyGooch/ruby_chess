@@ -36,10 +36,6 @@ class Game
     swap_turn
   end
 
-  def notify_players
-
-  end
-
   def swap_turn
     if @curr_idx == 0
       @curr_idx = 1
@@ -47,11 +43,9 @@ class Game
        @curr_idx = 0
     end
   end
-
 end
 
 if __FILE__ == $PROGRAM_NAME
-
   game = Game.new
   game.play
 end

@@ -25,15 +25,8 @@ class Board
   end
 
   def move(start, end_pos)
-
     raise "Not a valid move! for #{self[start]}" unless self[start].valid_moves.include?(end_pos)
-
     move!(start, end_pos)
-
-  end
-
-  def attack(pos)
-
   end
 
   def move!(start, end_pos)
@@ -147,5 +140,4 @@ class Board
       fill_king(color)
     end
   end
-
 end

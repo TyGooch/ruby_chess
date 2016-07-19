@@ -9,5 +9,4 @@ class HumanPlayer < Player
     end_pos = @display.move
     return [start_pos, end_pos]
   end
-
 end

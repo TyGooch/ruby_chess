@@ -18,7 +18,6 @@ class Pawn < Piece
 
 
   private
-
   def at_start_row?
     (color == :white) ? (return pos[0] == 6) : (return pos[0] == 1)
     false
