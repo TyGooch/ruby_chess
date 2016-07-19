@@ -25,21 +25,39 @@ class Board
   end
 
   def move(start, end_pos)
-    raise "Not a valid move!" unless self[start].valid_moves.include?(end_pos)
-    start_x, start_y = start
-    end_x, end_y = end_pos
-    rows[end_x][end_y] = rows[start_x][start_y]
-    rows[start_x][start_y] = NullPiece.instance
+
+    raise "Not a valid move! for #{self[start]}" unless self[start].valid_moves.include?(end_pos)
+
+    # piece = self[start]
+    # piece.pos = end_pos
+    # self[end_pos] = piece
+    # self[start] = NullPiece.instance
+    # start_x, start_y = start
+    # end_x, end_y = end_pos
+    # rows[end_x][end_y] = rows[start_x][start_y]
+    # rows[start_x][start_y] = NullPiece.instance
+    move!(start, end_pos)
+
+  end
+
+  def attack(pos)
 
   end
 
   def move!(start, end_pos)
+    # piece = self[start]
+    # piece.pos = end_pos
     # self[end_pos] = self[start]
     # self[start] = NullPiece.instance
+
     start_x, start_y = start
     end_x, end_y = end_pos
-    rows[end_x][end_y] = rows[start_x][start_y]
+    piece = rows[start_x][start_y]
+    rows[end_x][end_y] = piece
     rows[start_x][start_y] = NullPiece.instance
+
+    piece.pos = end_pos
+    nil
   end
 
   # private
@@ -77,15 +95,15 @@ class Board
     king_pos = find_king(color)
     @rows.each do |row|
       row.each do |piece|
-        # byebug
         return true if !piece.is_a?(NullPiece) && piece.moves.include?(king_pos) && piece.color != color
       end
     end
     false
   end
 
-  def checkmate?
+  def checkmate?(color)
     king_pos = find_king(color)
+    byebug
     return true if in_check?(color) && self[king_pos].valid_moves.empty?
     false
   end

@@ -46,7 +46,7 @@ module Slideable
       if board.empty?(pos)
         moves << pos
       else
-        move << pos if board[pos].color != color
+        moves << pos if board[pos].color != color
         break
       end
     end
