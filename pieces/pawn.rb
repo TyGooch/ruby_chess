@@ -11,7 +11,7 @@ class Pawn < Piece
     row, col = pos
     result = []
     forward_steps.each do |step|
-      result << [row, col + step]
+      result << [row + step, col]
     end
     result
   end
@@ -25,7 +25,7 @@ class Pawn < Piece
   end
 
   def forward_dir
-    (color == :white) ? (1) : (-1)
+    (color == :white) ? (-1) : (1)
   end
 
   def forward_steps

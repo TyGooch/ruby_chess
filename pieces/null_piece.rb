@@ -23,4 +23,8 @@ class NullPiece
     true
   end
 
+  def in_check?
+    false
+  end
+
 end

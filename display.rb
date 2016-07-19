@@ -1,6 +1,7 @@
 require "colorize"
 require_relative "cursorable"
 require_relative "board"
+require 'byebug'
 
 class Display
   include Cursorable
@@ -57,7 +58,5 @@ end
 board = Board.new
 
 d = Display.new(board)
-p d.board.in_check?(:black)
-# while true
-#   d.move
-# end
+p d.board.rows[6][0].valid_moves
+p "hello"

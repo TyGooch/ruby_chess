@@ -25,8 +25,21 @@ class Board
   end
 
   def move(start, end_pos)
-    self[end_pos] = self[start]
-    self[start] = NullPiece.instance
+    raise "Not a valid move!" unless self[start].valid_moves.include?(end_pos)
+    start_x, start_y = start
+    end_x, end_y = end_pos
+    rows[end_x][end_y] = rows[start_x][start_y]
+    rows[start_x][start_y] = NullPiece.instance
+
+  end
+
+  def move!(start, end_pos)
+    # self[end_pos] = self[start]
+    # self[start] = NullPiece.instance
+    start_x, start_y = start
+    end_x, end_y = end_pos
+    rows[end_x][end_y] = rows[start_x][start_y]
+    rows[start_x][start_y] = NullPiece.instance
   end
 
   # private
